@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+    <!-- Dynamically links to your static asset directory -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Task Manager</h1>
+        
+        <!-- Interactive Form submission handling -->
+        <form action="{{ url_for('create') }}" method="POST" class="task-form">
+            <input type="text" name="title" placeholder="Task Title" required>
+            <textarea name="description" placeholder="Task Description..."></textarea>
+            <button type="submit">Add Task</button>
+        </form>
+
+        <hr>
+
+        <!-- Python-driven loop iterating over SQL query results -->
+        <div class="task-list">
+            {% for task in tasks %}
+                <div class="task-card">
+                    <h3>{{ task['title'] }}</h3>
+                    <p>{{ task['description'] }}</p>
+                </div>
+            {% else %}
+                <p>No tasks added yet!</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
