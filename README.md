@@ -9,16 +9,27 @@ Here is a minimal, end-to-end blueprint for a Task Manager Web App using your ex
 
 Flask relies on a strict folder layout to automatically locate your HTML markup (templates/) and stylesheets (static/):
 text
+
 flask_project/
+
 │
+
 ├── init_db.sh          # Shell script to build database
+
 ├── schema.sql          # SQL file defining your tables
+
 ├── app.py              # Main Python/Flask backend execution file
+
 │
+
 ├── static/
+
 │   └── style.css       # Front-end styling rules
+
 └── templates/
+.
     └── index.html      # Front-end layout skeleton
+
 Use code with caution.
 
 2. The Database Layer (SQL & Shell Scripting)
