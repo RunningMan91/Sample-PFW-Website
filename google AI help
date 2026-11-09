@@ -1,0 +1,81 @@
+Setting up your Flask app on PythonAnywhere is a great choice because it gives you a persistent file system to keep your SQLite database alive.
+Follow these step-by-step instructions to get your repository deployed.
+
+Step 1: Open a Bash Console on PythonAnywhere
+
+1. Log into your account at PythonAnywhere.com.
+2. On your main Dashboard, look for the Consoles section.
+3. Click on Bash to open a live Linux terminal in your browser.
+
+Step 2: Clone Your GitHub Repository
+
+Inside the Bash console, download your project files from GitHub by running the following command (replace your-username and your-repo-name with your actual GitHub details):
+bash
+git clone https://github.com
+Use code with caution.
+Note: If your repository is private, it will ask for your GitHub username and a Personal Access Token (or password).
+
+Step 3: Run Your Initialization Script
+
+Navigate into your newly downloaded project folder and run the database setup script we wrote earlier:
+bash
+# Move into your project directory
+cd your-repo-name
+
+# Make your shell script executable and run it
+chmod +x init_db.sh
+./init_db.sh
+Use code with caution.
+This will create your database.db file, set up your Python virtual environment (venv), and install Flask automatically.
+
+Step 4: Configure the Web App via Dashboard
+
+1. Keep your console open, but open a new browser tab and go back to your PythonAnywhere Dashboard.
+2. Click on the Web tab near the top right.
+3. Click the green Add a new web app button.
+4. Click Next, then select Manual Configuration (do not select the "Flask" option here, as we want to use the custom virtual environment your shell script built).
+5. Choose Python 3.10 (or whichever matching version your script utilized) and click Next.
+
+Step 5: Link Paths & Virtual Environment
+
+Once the web app layout loads, scroll down to configure these specific sections:
+
+Code Section
+
+• Source code: /home/your-username/your-repo-name
+• Working directory: /home/your-username/your-repo-name
+
+Virtualenv Section
+
+• Click the red text that says "Enter path to a virtualenv".
+• Type: /home/your-username/your-repo-name/venv and click the blue checkmark.
+
+Step 6: Update the WSGI Configuration File
+
+PythonAnywhere uses a special configuration file to bridge the server to your Python code.
+1. Under the Code section, find the link that says WSGI configuration file (it looks like /var/www/your_username_pythonanywhere_com_wsgi.py). Click it to open an editor.
+2. Delete everything inside that file.
+3. Paste the following configuration snippet:
+python
+import sys
+import os
+
+# Introduce your app folder to the Python path
+path = '/home/your-username/your-repo-name'
+if path not in sys.path:
+    sys.path.insert(0, path)
+
+# Set the working directory context
+os.chdir(path)
+
+# Import the Flask app object from app.py
+from app import app as application
+Use code with caution.
+4. Click the green Save button in the top right.
+
+Step 7: Reload and Launch
+
+1. Go back to your Web tab.
+2. Scroll to the top and click the large green Reload pythonanywhere.com button.
+3. Click the link to your domain at the top of the page. Your live Task Manager application is now online!
+Let me know if you run into any errors when reloading the app, or if you need to modify your database connection string in app.py to use an absolute file path so PythonAnywhere can find your SQLite file.
