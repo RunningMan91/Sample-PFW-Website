@@ -6,7 +6,7 @@ Combining Flask (Python), HTML, CSS, SQL, and Shell Scripting creates a highly p
 Here is a minimal, end-to-end blueprint for a Task Manager Web App using your exact tech stack.
 
 1. Project Directory Structure
-
+ 
 Flask relies on a strict folder layout to automatically locate your HTML markup (templates/) and stylesheets (static/):
 text
 
