@@ -27,7 +27,7 @@ flask_project/
 │   └── style.css       # Front-end styling rules
 
 └── templates/
-.
+
     └── index.html      # Front-end layout skeleton
 
 Use code with caution.
